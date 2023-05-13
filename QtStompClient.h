@@ -89,8 +89,6 @@ private:
     const char* m_login;
     const char* m_passcode;
     const char* m_vHost;
-    //void(*m_onConnectedCallback)(void);
-    //void(*m_onMessageCallback)(const StompMessage &s);
 };
 
 #endif //QTSTOMP_H
