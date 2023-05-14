@@ -12,13 +12,19 @@ setup a new connection:
       connect(myClient, &QTWebStompClient::isClosed, this, &MainWindow::connectionClosed);
       connect(myClient, &QTWebStompClient::submitError, this, &MainWindow::getErrorMessage);
       myClient->openConnection();
+      
 create a timer for a heartbeat
+
       heartbeater.setInterval(2500ms);
       connect(&heartbeater, &QTimer::timeout, this, &MainWindow::sendHeartBeat);
+      
 in the timeout routine just send the QWebSocket::ping
+
       myClient->heartBeat();
+      
 The QtStompClient::heartbeat() is doing this for you. 
 next step is to subscribe to a topic nad start the heartbeat by
+
       myClient->Subscribe("/topic/user/trigger",QTWebStompClient::AckMode::Auto);
       heartbeater.start();
     
