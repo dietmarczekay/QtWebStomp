@@ -28,3 +28,14 @@ next step is to subscribe to a topic nad start the heartbeat by
       myClient->Subscribe("/topic/user/trigger",QTWebStompClient::AckMode::Auto);
       heartbeater.start();
     
+'subscribedMessage' get the received message as argument. With this you can extract the needed information:
+
+      void MainWindow::subscribedMessage(QString message)
+      {
+          qDebug() << QDateTime::currentMSecsSinceEpoch() << message;
+          StompMessage stompMessage(message.toStdString().c_str());
+
+          QJsonDocument json = QJsonDocument::fromJson(stompMessage.m_message.c_str());
+          QJsonObject dataObject = json.object();
+          ...
+      }
